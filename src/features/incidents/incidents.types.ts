@@ -1,5 +1,3 @@
-export type IncidentStatusInterface = "DECLARED" | "RESOLVED";
-
 export interface UserInterface {
   id: String;
   realName: String;
@@ -23,31 +21,16 @@ export interface SeverityInterface {
 
 export interface ParticipantInterface {
   user: UserInterface;
-  role?: RoleInterface;
+  role: RoleInterface | null;
 }
 
 export type ParticipantsInterface = Array<ParticipantInterface>
 
-export interface IncidentsResponseInterface {
+export interface IncidentsInterface {
   id: Number;
   name: String;
-  incidentStatusId: IncidentStatusInterface;
+  incidentStatusId: String;
   duration: Number;
   participants: ParticipantsInterface;
-  severity: SeverityInterface;
-}
-
-export interface IncidentsInterface {
-  name: String;
-  severityName?: String;
-  userName?: String;
-  userAvatar?: String;
-  channelName: String;
-  createdOn: String;
-  duration: Number;
-  incidentStatusId: IncidentStatusInterface;
-}
-
-export interface IncidentsState {
-  incidents: Array<IncidentsInterface>
+  severity: SeverityInterface | null;
 }
