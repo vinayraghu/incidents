@@ -1,23 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import IncidentListItem from './IncidentListItem';
 import {
-  getIncidents,
-  selectIncidents,
+  getIncidentsApiData,
+  selectIncidentsApiData,
 } from './incidentsSlice';
 
 const IncidentsList = () => {
-  const incidents = useSelector(selectIncidents);
+  const incidentsApiData = useSelector(selectIncidentsApiData);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getIncidents())
+    dispatch(getIncidentsApiData())
   }, [dispatch]);
 
   return (
     <div>
       {
-        incidents.map(incident => <IncidentListItem incident={incident} />)
+        incidentsApiData.map(incident => <IncidentListItem incident={incident} key={incident.id} />)
       }
     </div>
   );

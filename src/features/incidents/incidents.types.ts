@@ -1,22 +1,22 @@
 export interface UserInterface {
-  id: String;
-  realName: String;
-  avatarUrl: String;
-  chatUserId: String;
+  id: string;
+  realName: string;
+  avatarUrl: string;
+  chatUserId: string;
 }
 
 export interface RoleInterface {
-  id: Number;
-  name: String;
-  description: String;
+  id: number;
+  name: string;
+  description: string;
 }
 
 export interface SeverityInterface {
-  id: Number;
-  name: String;
-  description: String;
-  sortOrder: Number;
-  emoji: String;
+  id: number;
+  name: string;
+  description: string;
+  sortOrder: number;
+  emoji: string;
 }
 
 export interface ParticipantInterface {
@@ -27,10 +27,10 @@ export interface ParticipantInterface {
 export type ParticipantsInterface = Array<ParticipantInterface>
 
 export interface IncidentsInterface {
-  id: Number;
-  name: String;
-  incidentStatusId: String;
-  duration: Number;
+  id: number;
+  name: string;
+  incidentStatusId: string;
+  duration: number;
   participants: ParticipantsInterface;
   severity: SeverityInterface | null;
 }
