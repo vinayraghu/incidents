@@ -2,9 +2,11 @@ import React from 'react';
 import { IncidentInterface } from './incidents.types';
 import { getSeverityName } from './incidents.helpers';
 import Commander from './Commander'
+import ChannelName from './ChannelName'
+import Timestamp from './Timestamp'
 
 const IncidentsListItem = ({ incident } : { incident: IncidentInterface }) => {
-  const { id, name, incidentStatusId, duration, participants, severity }= incident;
+  const { id, name, incidentStatusId, duration, participants, severity, createdOn }= incident;
   const severityName = getSeverityName(severity);
 
   return (
@@ -16,6 +18,8 @@ const IncidentsListItem = ({ incident } : { incident: IncidentInterface }) => {
         )
       }
       <Commander participants={participants} />
+      <ChannelName incident={incident} />
+      <Timestamp createdOn ={createdOn} />
     </div>
   );
 }

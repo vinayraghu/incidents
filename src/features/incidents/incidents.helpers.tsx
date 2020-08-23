@@ -30,6 +30,12 @@ const getChannelId = (incident: IncidentInterface) => {
   return incident.channelId
 }
 
+const getChannelName = (incident: IncidentInterface) => {
+  return incident.channelName
+}
+
+const getLocalDate = (createdOn: string): string => new Date(createdOn).toLocaleDateString();
+
 export {
   getSeverityName,
   getCommander,
@@ -37,5 +43,7 @@ export {
   getCommanderAvatar,
   getWorkspace,
   getChannelId,
-  getWorkspaceTeamId
+  getWorkspaceTeamId,
+  getChannelName,
+  getLocalDate
 }

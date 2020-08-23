@@ -6,7 +6,9 @@ import IncidentsList from './IncidentsList'
 import { getSeverityName, getCommander, getCommanderName, getCommanderAvatar,
   getWorkspace,
   getChannelId,
-  getWorkspaceTeamId
+  getChannelName,
+  getWorkspaceTeamId,
+  getLocalDate
 } from './incidents.helpers';
 
 const mockIncident = {
@@ -172,3 +174,11 @@ test('The getWorkspaceTeamId method', () => {
 test('The getChannelId method', () => {
   expect(getChannelId(mockIncident)).toBe('G017DQCKZT5')
 })
+
+test('The getChannelName method', () => {
+  expect(getChannelName(mockIncident)).toBe('-incident-20200720-incident-with-private-room')
+})
+
+test('The getLocalDate method converts UTC date to local date string', () => {
+  expect(getLocalDate(`2020-07-21T13:05:55Z`)).toBe('7/21/2020')
+});
