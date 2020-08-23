@@ -24,10 +24,10 @@ export interface ParticipantInterface {
   role: RoleInterface | null;
 }
 
-export type ParticipantsInterface = Array<ParticipantInterface>
+export type ParticipantsInterface = Array<ParticipantInterface>;
 
 export interface WorkspaceInterface {
-  id: number,
+  id: number;
   name: string;
   teamId: string;
   appId: string;
@@ -40,7 +40,8 @@ export interface IncidentInterface {
   participants: ParticipantsInterface;
   severity: SeverityInterface | null;
   channelId: string;
-  channelName:string;
-  channelPrivate:boolean;
+  channelName: string;
+  channelPrivate: boolean;
   workspace: WorkspaceInterface;
+  createdOn: string;
 }

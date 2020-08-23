@@ -4,9 +4,10 @@ import { getSeverityName } from './incidents.helpers';
 import Commander from './Commander'
 import ChannelName from './ChannelName'
 import Timestamp from './Timestamp'
+import Duration from './Duration'
 
 const IncidentsListItem = ({ incident } : { incident: IncidentInterface }) => {
-  const { id, name, incidentStatusId, duration, participants, severity, createdOn }= incident;
+  const { id, name, incidentStatusId, duration, participants, severity, createdOn } = incident;
   const severityName = getSeverityName(severity);
 
   return (
@@ -20,6 +21,7 @@ const IncidentsListItem = ({ incident } : { incident: IncidentInterface }) => {
       <Commander participants={participants} />
       <ChannelName incident={incident} />
       <Timestamp createdOn ={createdOn} />
+      <Duration duration={duration} />
     </div>
   );
 }

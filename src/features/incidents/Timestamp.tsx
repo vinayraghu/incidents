@@ -1,4 +1,5 @@
 import React from 'react'
+import { getLocalDate } from './incidents.helpers'
 
 interface TimestampInterface {
   createdOn: string; // UTC time
@@ -6,7 +7,7 @@ interface TimestampInterface {
 
 const Timestamp = ({ createdOn } : TimestampInterface) => {
   return (
-    <p>{localDate}</p>
+    <p>{getLocalDate(createdOn)}</p>
   )
 }
 
