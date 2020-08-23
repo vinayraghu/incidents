@@ -5,6 +5,7 @@ import Commander from './Commander'
 import ChannelName from './ChannelName'
 import Timestamp from './Timestamp'
 import Duration from './Duration'
+import IncidentStatusBadge from './IncidentStatusBadge'
 
 const IncidentsListItem = ({ incident } : { incident: IncidentInterface }) => {
   const { id, name, incidentStatusId, duration, participants, severity, createdOn } = incident;
@@ -22,6 +23,7 @@ const IncidentsListItem = ({ incident } : { incident: IncidentInterface }) => {
       <ChannelName incident={incident} />
       <Timestamp createdOn ={createdOn} />
       <Duration duration={duration} />
+      <IncidentStatusBadge incidentStatusId={incidentStatusId} />
     </div>
   );
 }

@@ -2,13 +2,16 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk, RootState } from '../../app/store';
 import { IncidentInterface } from './incidents.types';
 import { fetchIncidents } from './incidentsService';
+import { getOpenIncidentCount } from './incidents.helpers';
 
 interface IncidentsState {
-  apiData: Array<IncidentInterface>
+  apiData: Array<IncidentInterface>;
+  openIncidentCount: number;
 }
 
 const initialState: IncidentsState = {
-  apiData: []
+  apiData: [],
+  openIncidentCount: 0
 };
 
 export const incidentsSlice = createSlice({
@@ -17,6 +20,7 @@ export const incidentsSlice = createSlice({
   reducers: {
     receiveIncidents: (state, action: PayloadAction<Array<IncidentInterface>>) => {
       state.apiData = action.payload
+      state.openIncidentCount = getOpenIncidentCount(action.payload)
       return state;
     },
   },

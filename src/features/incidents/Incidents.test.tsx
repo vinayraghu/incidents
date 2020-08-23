@@ -14,6 +14,7 @@ import {
   getWorkspaceTeamId,
   getLocalDate,
   getDaysHoursMinutesSeconds,
+  getOpenIncidentCount
 } from "./incidents.helpers";
 
 const mockIncident = {
@@ -239,5 +240,9 @@ test("The getDaysHoursMinutesSeconds splits the given seconds into days, hours, 
     minutes: 0,
     seconds: 0,
   });
-
 });
+
+test('The getOpenIncidentCount returns number of incidents not in resolved status', () => {
+  expect(getOpenIncidentCount([mockIncident])).toBe(0);
+  expect(getOpenIncidentCount([{...mockIncident, incidentStatusId: "DECLARED"}])).toBe(1);
+})

@@ -71,6 +71,8 @@ const getDaysHoursMinutesSeconds = (
   };
 };
 
+const getOpenIncidentCount = (arr: Array<IncidentInterface>): number => arr.filter(i => i.incidentStatusId !== "RESOLVED").length
+
 export {
   getSeverityName,
   getCommander,
@@ -82,4 +84,5 @@ export {
   getChannelName,
   getLocalDate,
   getDaysHoursMinutesSeconds,
+  getOpenIncidentCount
 };
