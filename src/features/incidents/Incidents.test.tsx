@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from '../../app/store';
 import IncidentsList from './IncidentsList'
-import { getSeverityName, getIncidentCommander, getCommanderName, getCommanderAvatar } from './incidents.helpers';
+import { getSeverityName, getCommander, getCommanderName, getCommanderAvatar } from './incidents.helpers';
 
 test('The <IncidentsList> component should display key information from incidents', () => {
   const mounted = render(
@@ -25,7 +25,7 @@ test('The getSeverityName method returns severity name or an empty string', () =
   })).toBe('SEV-2')
 })
 
-test('The getIncidentCommander returns the commanders name if one exists', () => {
+test('The getCommander returns the commanders name if one exists', () => {
   const testData1 = [
     {
       "user": {
@@ -74,8 +74,8 @@ test('The getIncidentCommander returns the commanders name if one exists', () =>
       "role": null
     }
   ];
-  expect(getIncidentCommander(testData1)).toEqual(expectedResult)
-  expect(getIncidentCommander(testData2)).toBe(undefined);
+  expect(getCommander(testData1)).toEqual(expectedResult)
+  expect(getCommander(testData2)).toBe(undefined);
 });
 
 test('The getCommanderName returns the realName of the commander object', () => {
