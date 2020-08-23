@@ -16,6 +16,7 @@ import {
   getDaysHoursMinutesSeconds,
   getOpenIncidentsCount,
   getRecentIncidentsCount,
+  getMeanTimeToResolution,
 } from "./incidents.helpers";
 
 const mockIncident = {
@@ -257,4 +258,14 @@ test("The getRecentIncidentsCount method returns number of incidents opened in t
       { ...mockIncident, createdOn: new Date().toUTCString() },
     ])
   ).toBe(1);
+});
+
+test("The getMeanTimeToResolution calculates mean time to resolution", () => {
+  expect(getMeanTimeToResolution([mockIncident])).toBe(9725);
+  expect(
+    getMeanTimeToResolution([mockIncident, mockIncident, mockIncident])
+  ).toBe(9725);
+  expect(
+    getMeanTimeToResolution([{ ...mockIncident, incidentStatusId: "DECLARED" }])
+  ).toBe(0);
 });

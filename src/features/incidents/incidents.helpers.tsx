@@ -85,6 +85,21 @@ const getRecentIncidentsCount = (arr: Array<IncidentInterface>): number => {
   return recentIncidents.length;
 };
 
+const getMeanTimeToResolution = (arr: Array<IncidentInterface>): number => {
+  const resolvedIncidents = arr.filter(
+    (i) => i.incidentStatusId === "RESOLVED"
+  );
+  const resolvedIncidentsDurations = resolvedIncidents.map((i) => i.duration);
+  const totalResolvedIncidents = resolvedIncidentsDurations.length;
+  if (totalResolvedIncidents === 0) {
+    return 0;
+  }
+  const totalResolvedIncidentsDuration = resolvedIncidentsDurations.reduce(
+    (a, c) => a + c
+  );
+  return totalResolvedIncidentsDuration / totalResolvedIncidents;
+};
+
 export {
   getSeverityName,
   getCommander,
@@ -98,4 +113,5 @@ export {
   getDaysHoursMinutesSeconds,
   getOpenIncidentsCount,
   getRecentIncidentsCount,
+  getMeanTimeToResolution,
 };
