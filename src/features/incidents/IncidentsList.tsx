@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import IncidentListItem from './IncidentListItem';
 import {
   getIncidentsApiData,
   selectIncidentsApiData,
+  selectOpenIncidentsCount,
 } from './incidentsSlice';
+import OpenIncidentCount from './OpenIncidentCount';
 
 const IncidentsList = () => {
   const incidentsApiData = useSelector(selectIncidentsApiData);
+  const openIncidentsCount = useSelector(selectOpenIncidentsCount);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -15,11 +18,16 @@ const IncidentsList = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <>
+    <section>
       {
         incidentsApiData.map(incident => <IncidentListItem incident={incident} key={incident.id} />)
       }
-    </div>
+    </section>
+    <section>
+      <OpenIncidentCount count={openIncidentsCount} />
+    </section>
+    </>
   );
 }
 

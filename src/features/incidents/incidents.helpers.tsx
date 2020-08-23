@@ -1,3 +1,4 @@
+import differenceInDays from "date-fns/differenceInDays";
 import {
   SeverityInterface,
   ParticipantsInterface,
@@ -71,7 +72,18 @@ const getDaysHoursMinutesSeconds = (
   };
 };
 
-const getOpenIncidentCount = (arr: Array<IncidentInterface>): number => arr.filter(i => i.incidentStatusId !== "RESOLVED").length
+const getOpenIncidentsCount = (arr: Array<IncidentInterface>): number =>
+  arr.filter((i) => i.incidentStatusId !== "RESOLVED").length;
+
+const getRecentIncidentsCount = (arr: Array<IncidentInterface>): number => {
+  const recentIncidents = arr.filter((incident) => {
+    const incidentDate = new Date(incident.createdOn);
+    const today = new Date();
+    const dateDifference = differenceInDays(today, incidentDate);
+    return dateDifference < 30;
+  });
+  return recentIncidents.length;
+};
 
 export {
   getSeverityName,
@@ -84,5 +96,6 @@ export {
   getChannelName,
   getLocalDate,
   getDaysHoursMinutesSeconds,
-  getOpenIncidentCount
+  getOpenIncidentsCount,
+  getRecentIncidentsCount,
 };
