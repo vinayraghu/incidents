@@ -26,6 +26,12 @@ export interface ParticipantInterface {
 
 export type ParticipantsInterface = Array<ParticipantInterface>
 
+export interface WorkspaceInterface {
+  id: number,
+  name: string;
+  teamId: string;
+  appId: string;
+}
 export interface IncidentsInterface {
   id: number;
   name: string;
@@ -33,4 +39,8 @@ export interface IncidentsInterface {
   duration: number;
   participants: ParticipantsInterface;
   severity: SeverityInterface | null;
+  channelId: string;
+  channelName:string;
+  channelPrivate:boolean;
+  workspace: WorkspaceInterface;
 }
