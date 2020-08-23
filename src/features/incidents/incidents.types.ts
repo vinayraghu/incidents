@@ -32,7 +32,7 @@ export interface WorkspaceInterface {
   teamId: string;
   appId: string;
 }
-export interface IncidentsInterface {
+export interface IncidentInterface {
   id: number;
   name: string;
   incidentStatusId: string;
