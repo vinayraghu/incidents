@@ -17,6 +17,8 @@ import {
   getOpenIncidentsCount,
   getRecentIncidentsCount,
   getMeanTimeToResolution,
+  filterBySearchText,
+  filterByIncidentId
 } from "./incidents.helpers";
 
 const mockIncident = {
@@ -269,3 +271,14 @@ test("The getMeanTimeToResolution calculates mean time to resolution", () => {
     getMeanTimeToResolution([{ ...mockIncident, incidentStatusId: "DECLARED" }])
   ).toBe(0);
 });
+
+test('The filterBySearchText method filters the array if name and summary includes search text', () => {
+  expect(filterBySearchText([mockIncident, mockIncident], "Incident")).toEqual([mockIncident, mockIncident]);
+  expect(filterBySearchText([mockIncident], "incident")).toEqual([mockIncident]);
+  expect(filterBySearchText([mockIncident], "garbage")).toEqual([]);
+})
+
+test('The filterByIncidentId method filters the array to match on incidentStatusId', () => {
+  expect(filterByIncidentId([mockIncident], "DECLARED")).toEqual([]);
+  expect(filterByIncidentId([mockIncident], "RESOLVED")).toEqual([mockIncident]);
+})

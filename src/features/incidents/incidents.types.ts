@@ -44,4 +44,5 @@ export interface IncidentInterface {
   channelPrivate: boolean;
   workspace: WorkspaceInterface;
   createdOn: string;
+  summary: string | null;
 }

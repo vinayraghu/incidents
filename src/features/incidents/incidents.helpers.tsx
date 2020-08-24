@@ -100,6 +100,25 @@ const getMeanTimeToResolution = (arr: Array<IncidentInterface>): number => {
   return totalResolvedIncidentsDuration / totalResolvedIncidents;
 };
 
+const doesIncludeText = (incident: IncidentInterface, searchText: string): boolean => {
+  const searchQuery = searchText.toLowerCase();
+  const incidentName = incident.name?.toLowerCase();
+  const incidentSummary = incident.summary?.toLowerCase();
+
+  if (incidentSummary) {
+    return incidentName.includes(searchQuery) || incidentSummary.includes(searchQuery);
+  }
+  return incidentName.includes(searchQuery);
+}
+
+const filterBySearchText = (arr: Array<IncidentInterface>, searchText: string): Array<IncidentInterface> => {
+  return arr.filter((incident) => doesIncludeText(incident, searchText))
+}
+
+const filterByIncidentId = (arr: Array<IncidentInterface>, incidentStatusId: string) : Array<IncidentInterface> => {
+  return arr.filter(incident => incident.incidentStatusId === incidentStatusId)
+}
+
 export {
   getSeverityName,
   getCommander,
@@ -114,4 +133,6 @@ export {
   getOpenIncidentsCount,
   getRecentIncidentsCount,
   getMeanTimeToResolution,
+  filterBySearchText,
+  filterByIncidentId
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import IncidentListItem from "./IncidentListItem";
 import {
@@ -11,6 +11,8 @@ import {
 import OpenIncidentsCount from "./OpenIncidentsCount";
 import RecentIncidentsCount from "./RecentIncidentsCount";
 import MeanTimeToResolution from "./MeanTimeToResolution";
+import { IncidentInterface } from "./incidents.types";
+import { filterBySearchText } from "./incidents.helpers";
 
 const IncidentsList = () => {
   const incidentsApiData = useSelector(selectIncidentsApiData);
@@ -24,10 +26,32 @@ const IncidentsList = () => {
     dispatch(getIncidentsApiData());
   }, [dispatch]);
 
+  const [searchText, setSearchText] = useState('');
+  const [filteredResults, setFilteredResults] = useState<Array<IncidentInterface>>([])
+
+  useEffect(() => {
+    setFilteredResults(filterBySearchText(incidentsApiData, searchText))
+  }, [incidentsApiData, searchText]);
+
+  const handleSearchInput = (event: ChangeEvent<HTMLInputElement>) => setSearchText(event.target.value);
+
   return (
     <>
       <section>
-        {incidentsApiData.map((incident) => (
+        <header>
+          <input type="text" value={searchText} onChange={handleSearchInput} />
+          <section>
+            <label>
+              <input type="checkbox" value="" />
+              Declared
+            </label>
+            <label>
+              <input type="checkbox" value="" />
+              Resolved
+            </label>
+          </section>
+        </header>
+        {filteredResults.map((incident) => (
           <IncidentListItem incident={incident} key={incident.id} />
         ))}
       </section>
