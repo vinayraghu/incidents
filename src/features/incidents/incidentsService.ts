@@ -5,7 +5,7 @@ const fetchIncidents = (): Promise<Array<IncidentInterface>> => {
   return new Promise((res, rej) => {
     setTimeout(() => {
       return res(incidentsData)
-    }, 1000)
+    }, 100)
   })
 }
 
