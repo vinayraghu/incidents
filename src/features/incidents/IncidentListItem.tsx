@@ -8,7 +8,7 @@ import Duration from './Duration'
 import IncidentStatusBadge from './IncidentStatusBadge'
 
 const IncidentsListItem = ({ incident } : { incident: IncidentInterface }) => {
-  const { id, name, incidentStatusId, duration, participants, severity, createdOn } = incident;
+  const { name, incidentStatusId, duration, participants, severity, createdOn } = incident;
   const severityName = getSeverityName(severity);
 
   return (

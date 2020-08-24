@@ -12,7 +12,7 @@ import OpenIncidentsCount from "./OpenIncidentsCount";
 import RecentIncidentsCount from "./RecentIncidentsCount";
 import MeanTimeToResolution from "./MeanTimeToResolution";
 import { IncidentInterface } from "./incidents.types";
-import { filterBySearchText } from "./incidents.helpers";
+import { filterBySearchText, filterByIncidentStatusId } from "./incidents.helpers";
 
 const IncidentsList = () => {
   const incidentsApiData = useSelector(selectIncidentsApiData);
@@ -27,11 +27,23 @@ const IncidentsList = () => {
   }, [dispatch]);
 
   const [searchText, setSearchText] = useState('');
+  const [showDeclared, setShowDeclared] = useState(true);
+  const [showResolved, setShowResolved] = useState(true);
   const [filteredResults, setFilteredResults] = useState<Array<IncidentInterface>>([])
 
   useEffect(() => {
-    setFilteredResults(filterBySearchText(incidentsApiData, searchText))
-  }, [incidentsApiData, searchText]);
+    // Two booleans, 4 cases
+    // Additionally have to acount for search text
+    if (showResolved && showDeclared) {
+      setFilteredResults(filterBySearchText(incidentsApiData, searchText))
+    } else if (showResolved && !showDeclared) {
+      setFilteredResults(filterBySearchText(filterByIncidentStatusId(incidentsApiData, "RESOLVED"), searchText))
+    } else if(!showResolved && showDeclared) {
+      setFilteredResults(filterBySearchText(filterByIncidentStatusId(incidentsApiData, "DECLARED"), searchText))
+    } else {
+      setFilteredResults([])
+    }
+  }, [incidentsApiData, showDeclared, showResolved, searchText])
 
   const handleSearchInput = (event: ChangeEvent<HTMLInputElement>) => setSearchText(event.target.value);
 
@@ -42,11 +54,11 @@ const IncidentsList = () => {
           <input type="text" value={searchText} onChange={handleSearchInput} />
           <section>
             <label>
-              <input type="checkbox" value="" />
+              <input type="checkbox" checked={showDeclared} onChange={() => setShowDeclared(!showDeclared)} />
               Declared
             </label>
             <label>
-              <input type="checkbox" value="" />
+              <input type="checkbox" checked={showResolved} onChange={() => setShowResolved(!showResolved)} />
               Resolved
             </label>
           </section>

@@ -115,7 +115,7 @@ const filterBySearchText = (arr: Array<IncidentInterface>, searchText: string): 
   return arr.filter((incident) => doesIncludeText(incident, searchText))
 }
 
-const filterByIncidentId = (arr: Array<IncidentInterface>, incidentStatusId: string) : Array<IncidentInterface> => {
+const filterByIncidentStatusId = (arr: Array<IncidentInterface>, incidentStatusId: string) : Array<IncidentInterface> => {
   return arr.filter(incident => incident.incidentStatusId === incidentStatusId)
 }
 
@@ -134,5 +134,5 @@ export {
   getRecentIncidentsCount,
   getMeanTimeToResolution,
   filterBySearchText,
-  filterByIncidentId
+  filterByIncidentStatusId
 };
