@@ -16,36 +16,7 @@ import {
   filterBySearchText,
   filterByIncidentStatusId,
 } from "./incidents.helpers";
-import styled, { createGlobalStyle } from "styled-components";
-
-const GlobalStyles = createGlobalStyle`
-  * {
-      box-sizing: border-box;
-  }
-`;
-
-const SearchInput = styled.input`
-  width: 100%;
-  font-size: 20px;
-  padding: 10px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-`;
-
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 1;
-  @media (min-width: 768px) {
-    grid-template-columns: 75% 25%;
-  }
-`;
-
-const Sidebar = styled.div`
-  padding: 15px;
-`;
-const Content = styled.div`
-  padding: 15px;
-`;
+import { GlobalStyles, IncidentsContainer, SearchInput, PageGrid, Sidebar, Content, IncidentsHeader } from './incident.styles';
 
 const IncidentsList = () => {
   const incidentsApiData = useSelector(selectIncidentsApiData);
@@ -95,46 +66,50 @@ const IncidentsList = () => {
 
   return (
     <>
-      <Grid>
+      <PageGrid>
         <GlobalStyles />
         <Content>
-          <label htmlFor="incidents-search">
-            Search for incidents
-            <SearchInput
-              id="incidents-search"
-              type="text"
-              value={searchText}
-              onChange={handleSearchInput}
-            />
-          </label>
-          <section>
-            <label>
-              <input
-                type="checkbox"
-                checked={showDeclared}
-                onChange={() => setShowDeclared(!showDeclared)}
+          <IncidentsHeader>
+            <label htmlFor="incidents-search">
+              Search for incidents
+              <SearchInput
+                id="incidents-search"
+                type="text"
+                value={searchText}
+                onChange={handleSearchInput}
               />
-              Declared
             </label>
-            <label>
-              <input
-                type="checkbox"
-                checked={showResolved}
-                onChange={() => setShowResolved(!showResolved)}
-              />
-              Resolved
-            </label>
-          </section>
-          {filteredResults.map((incident) => (
-            <IncidentListItem incident={incident} key={incident.id} />
-          ))}
+            <section>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={showDeclared}
+                  onChange={() => setShowDeclared(!showDeclared)}
+                />
+                Declared
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={showResolved}
+                  onChange={() => setShowResolved(!showResolved)}
+                />
+                Resolved
+              </label>
+            </section>
+          </IncidentsHeader>
+          <IncidentsContainer>
+            {filteredResults.map((incident) => (
+              <IncidentListItem incident={incident} key={incident.id} />
+            ))}
+          </IncidentsContainer>
         </Content>
         <Sidebar>
           <OpenIncidentsCount count={openIncidentsCount} />
           <RecentIncidentsCount count={recentIncidentsCount} />
           <MeanTimeToResolution time={meanTimeToResolution} />
         </Sidebar>
-      </Grid>
+      </PageGrid>
     </>
   );
 };

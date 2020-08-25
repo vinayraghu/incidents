@@ -11,7 +11,7 @@ import {
   CardBody,
   CardHeader,
   IncidentTitle,
-  Badge,
+  Badge
 } from "./incident.styles";
 
 const IncidentsListItem = ({ incident }: { incident: IncidentInterface }) => {
@@ -26,26 +26,26 @@ const IncidentsListItem = ({ incident }: { incident: IncidentInterface }) => {
   const severityName = getSeverityName(severity);
 
   return (
-    <Card>
-      <CardHeader>
-        <IncidentTitle>{name}</IncidentTitle>
-        {severityName && (
-          <Badge>
-            <p>{severityName}</p>
-          </Badge>
-        )}
-      </CardHeader>
-      <CardBody>
-        <div>
-          <b>{"Slack: "}</b>
-          <ChannelName incident={incident} />
-        </div>
-        <Timestamp createdOn={createdOn} />
-        <Duration duration={duration} />
-        <IncidentStatusBadge incidentStatusId={incidentStatusId} />
-      </CardBody>
-      <Commander participants={participants} />
-    </Card>
+      <Card>
+        <CardHeader>
+          <IncidentTitle>{name}</IncidentTitle>
+        </CardHeader>
+        <CardBody>
+          {severityName && (
+            <Badge>
+              <p>{severityName}</p>
+            </Badge>
+          )}
+          <div>
+            <b>{"Slack: "}</b>
+            <ChannelName incident={incident} />
+          </div>
+          <Timestamp createdOn={createdOn} />
+          <Duration duration={duration} />
+          <IncidentStatusBadge incidentStatusId={incidentStatusId} />
+        </CardBody>
+        <Commander participants={participants} />
+      </Card>
   );
 };
 

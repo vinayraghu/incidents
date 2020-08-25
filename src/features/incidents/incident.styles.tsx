@@ -1,10 +1,49 @@
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from "styled-components";
+
+const GlobalStyles = createGlobalStyle`
+  * {
+      box-sizing: border-box;
+  }
+`;
+
+const SearchInput = styled.input`
+  width: 100%;
+  font-size: 20px;
+  padding: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+`;
+
+const PageGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1;
+  @media (min-width: 768px) {
+    grid-template-columns: 75% 25%;
+  }
+`;
+
+const Sidebar = styled.div`
+  padding: 15px;
+`;
+const Content = styled.div`
+  padding: 15px;
+`;
 
 const StyledCount = styled.h3`
   font-size: 4rem;
   text-align: center;
   margin-bottom: 10px;
   margin-top: 10px;
+`;
+
+const IncidentsContainer = styled.div`
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  grid-gap: 15px;
 `;
 
 const StyledCountText = styled.div`
@@ -16,11 +55,12 @@ const StyledCountText = styled.div`
 const Card = styled.article`
   border: 1px solid #ddd;
   border-radius: 5px;
-  margin: 15px;
-  margin-bottom: 30px;
-  padding: 30px;
-  font-family: "Roboto Mono"; monospace;
+  font-family: "Roboto Mono", monospace;
 `;
+
+const IncidentsHeader = styled.header`
+  margin-bottom: 30px;
+`
 
 const CardBody = styled.section`
   padding: 15px;
@@ -36,7 +76,7 @@ const CardHeader = styled.header`
 const IncidentTitle = styled.h4`
   font-family: "Poppins", sans-serif;
   margin: 0;
-  font-size: 21px;
+  font-size: 16px;
 `;
 
 const Badge = styled.div`
@@ -79,5 +119,12 @@ export {
   Badge,
   AvatarImg,
   CardFooter,
-  CommanderTitle
+  CommanderTitle,
+  IncidentsContainer,
+  GlobalStyles,
+  SearchInput,
+  PageGrid,
+  Sidebar,
+  Content,
+  IncidentsHeader
 }
