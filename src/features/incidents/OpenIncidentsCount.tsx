@@ -1,15 +1,17 @@
 import React from 'react'
-
+import { StyledCount, StyledCountText, Card } from './incident.styles';
 interface OpenIncidentsCountInterface {
   count: number;
 }
 
+
+
 const OpenIncidentCount = ({ count }: OpenIncidentsCountInterface) => {
   return (
-    <>
-      <h3>Total open incidents</h3>
-      { count }
-    </>
+    <Card>
+      <StyledCount>{ count }</StyledCount>
+      <StyledCountText>open incidents</StyledCountText>
+    </Card>
   )
 }
 

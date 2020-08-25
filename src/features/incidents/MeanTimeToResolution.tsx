@@ -1,5 +1,6 @@
 import React from 'react'
 import Duration from './Duration'
+import { StyledCountText, Card } from './incident.styles';
 
 interface MeanTimeToResolutionInterface {
   time: number;
@@ -7,10 +8,13 @@ interface MeanTimeToResolutionInterface {
 
 const MeanTimeToResolution = ({ time }: MeanTimeToResolutionInterface) => {
   return (
-    <>
-      <h3>Mean time to resolution</h3>
-      <Duration duration={time} />
-    </>
+    <Card>
+      <StyledCountText>
+        <Duration duration={time} />
+        <br />
+        Mean time to resolution
+      </StyledCountText>
+    </Card>
   )
 }
 

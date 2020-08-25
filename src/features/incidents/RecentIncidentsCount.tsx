@@ -1,15 +1,15 @@
 import React from 'react'
-
+import { StyledCount, StyledCountText, Card } from './incident.styles';
 interface RecentIncidentsCountInterface {
   count: number;
 }
 
 const RecentIncidentCount = ({ count }: RecentIncidentsCountInterface) => {
   return (
-    <>
-      <h3>Recent incidents (created in the past 30 days)</h3>
-      { count }
-    </>
+    <Card>
+      <StyledCount>{ count }</StyledCount>
+      <StyledCountText>Recent incidents</StyledCountText>
+    </Card>
   )
 }
 
